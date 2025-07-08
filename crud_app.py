@@ -2,6 +2,7 @@ from flask import Flask, render_template, redirect, request
 from flask_scss import Scss
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from pytz import timezone
 
 app = Flask(__name__)
 Scss(app)
@@ -15,7 +16,7 @@ class MyTask(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(100), nullable=False)
     completed = db.Column(db.Integer, default=0)
-    created = db.Column(db.DateTime, default=datetime.utcnow)
+    created = db.Column(db.DateTime, default=datetime.now)
 
     def __repr__(self) -> str:
         return f"Task {self.id}"
